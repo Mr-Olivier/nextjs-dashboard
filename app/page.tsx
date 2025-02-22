@@ -1,53 +1,135 @@
-import AcmeLogo from "@/app/ui/acme-logo";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import type React from "react";
+import {
+  ArrowRightIcon,
+  ChartBarIcon,
+  CurrencyDollarIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
+import { lusitana } from "@/app/ui/fonts";
 
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-        {/* <AcmeLogo /> */}
-      </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <div className="relative w-0 h-0 border-l-[15px] border-r-[15px] border-b-[26px] border-l-transparent border-r-transparent border-b-black" />
-          <p
-            className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
-          >
-            <strong>Welcome to Acme.</strong> This is the example for the{" "}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
-          </p>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
+    <main className="flex min-h-screen flex-col">
+      <nav className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex">
+              <div className="flex-shrink-0 flex items-center">
+                <CurrencyDollarIcon className="h-8 w-8 text-blue-500" />
+                <span
+                  className={`${lusitana.className} ml-2 text-2xl font-bold text-gray-900`}
+                >
+                  Acme Finance
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <Link
+                href="/login"
+                className="ml-8 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              >
+                Log in
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <Image
-            src="/hero-desktop.png"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
+      </nav>
 
-          <Image
-            src="/hero-mobile.png"
-            width={560}
-            height={620}
-            className="block md:hidden"
-            alt="Screenshot of the dashboard project showing mobile version"
-          />
+      <div className="flex-grow flex flex-col md:flex-row">
+        <div className="md:w-1/2 flex items-center justify-center p-8 md:p-16 bg-gray-50">
+          <div className="max-w-md">
+            <h1
+              className={`${lusitana.className} text-4xl font-bold text-gray-900 mb-6`}
+            >
+              Manage Your Finances with Ease
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Welcome to Acme Finance, your all-in-one solution for invoice
+              management and financial tracking.
+            </p>
+            <div className="space-y-4">
+              <FeatureItem
+                icon={ChartBarIcon}
+                text="Comprehensive dashboard for financial overview"
+              />
+              <FeatureItem
+                icon={CurrencyDollarIcon}
+                text="Easy invoice creation and management"
+              />
+              <FeatureItem
+                icon={UserCircleIcon}
+                text="Secure authentication and user profiles"
+              />
+            </div>
+            <div className="mt-8 space-x-4">
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              >
+                Go to Dashboard
+                <ArrowRightIcon className="ml-2 h-5 w-5" />
+              </Link>
+              <Link
+                href="/register"
+                className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+              >
+                Sign Up
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="md:w-1/2 bg-blue-600 flex items-center justify-center p-8 md:p-16">
+          <div className="relative w-full max-w-lg aspect-[4/3]">
+            <Image
+              src="/dashboard-preview.png"
+              alt="Dashboard preview"
+              layout="fill"
+              objectFit="contain"
+              className="rounded-lg shadow-xl"
+            />
+          </div>
         </div>
       </div>
+
+      <footer className="bg-gray-800 text-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-sm">
+                &copy; 2023 Acme Finance. All rights reserved.
+              </p>
+            </div>
+            <div className="flex space-x-6">
+              <Link href="/privacy" className="text-sm hover:text-gray-300">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-sm hover:text-gray-300">
+                Terms of Service
+              </Link>
+              <Link href="/contact" className="text-sm hover:text-gray-300">
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
+  );
+}
+
+function FeatureItem({
+  icon: Icon,
+  text,
+}: {
+  icon: React.ElementType;
+  text: string;
+}) {
+  return (
+    <div className="flex items-center">
+      <Icon className="h-6 w-6 text-blue-500 mr-3" />
+      <span className="text-gray-700">{text}</span>
+    </div>
   );
 }
